@@ -1,7 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
 import { redirect } from "next/navigation";
 
 export default function Login() {
