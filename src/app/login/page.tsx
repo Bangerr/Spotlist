@@ -12,7 +12,7 @@ export default function Login() {
 
   return (
     <Layout title="Log in to Spotify">
-      <div className="flex flex-col items-center justify-center w-screen h-screen gap-20">
+      <div className="flex flex-col items-center justify-center w-full h-screen gap-20">
         <Image
           src="/images/spotify_logo.png"
           alt="spotify logo"
