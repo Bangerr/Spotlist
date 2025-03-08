@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
 
     if (!profileResponse.ok) {
       return NextResponse.json(
-        { error: "Failed to fetch track" },
+        { error: "Failed to fetch Profile Data" },
         { status: profileResponse.status }
       );
     }
