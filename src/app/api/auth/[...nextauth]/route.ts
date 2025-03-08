@@ -16,7 +16,7 @@ export type AuthUser = {
 };
 
 const scope =
-  "user-read-email,playlist-read-private,playlist-modify-private,playlist-modify-public";
+  "user-read-email,user-read-private,user-top-read,playlist-read-private,playlist-modify-private,playlist-modify-public";
 
 export const authOptions: NextAuthOptions = {
   providers: [
