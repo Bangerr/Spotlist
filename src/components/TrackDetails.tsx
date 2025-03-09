@@ -86,7 +86,7 @@ const TrackDetails = () => {
 
           <div>Title: {title}</div>
           <div>Artist: {artist}</div>
-          <div>Lyrics: {track_lyrics}</div>
+          {/* <div>Lyrics: {track_lyrics}</div> */}
         </div>
       ) : (
         <div>Loading external IDS...</div>

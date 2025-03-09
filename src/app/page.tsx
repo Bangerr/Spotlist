@@ -4,6 +4,7 @@ import Login from "./login/page";
 import { ChartConfig } from "@/components/ui/chart";
 import VibeChecker from "@/components/VibeChecker";
 import TrackDetails from "@/components/TrackDetails";
+import TopItems from "@/components/TopItems";
 
 const chartConfig = {
   desktop: {
@@ -33,11 +34,12 @@ export default function Home() {
   }
 
   return (
-    <main className="w-full px-10 md:w-[30%] mx-auto h-full">
+    <main className="w-full px-10 md:w-[50%] mx-auto h-full">
       {/* Vibe checker */}
       <div className="mt-20">
-        <VibeChecker chartData={chartData} />
-        <TrackDetails />
+        {/* <VibeChecker chartData={chartData} /> */}
+        {/* <TrackDetails /> */}
+        <TopItems />
       </div>
     </main>
   );

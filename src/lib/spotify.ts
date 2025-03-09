@@ -52,6 +52,50 @@ export const getTrack = async (trackId: string) => {
   });
 };
 
+export const getTopTracks = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return console.error("Session not found or user not signed in.");
+  }
+
+  const access_token = session?.token?.access_token;
+  const expires_at = session?.token?.expires_at;
+  const readableExpiry = new Date(expires_at * 1000).toLocaleString();
+  console.log("Readable: ", readableExpiry);
+
+  return fetch(
+    `https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10`,
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
+};
+
+export const getTopArtists = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return console.error("Session not found or user not signed in.");
+  }
+
+  const access_token = session?.token?.access_token;
+  const expires_at = session?.token?.expires_at;
+  const readableExpiry = new Date(expires_at * 1000).toLocaleString();
+  console.log("Readable: ", readableExpiry);
+
+  return fetch(
+    `https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10`,
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
+};
+
 export const customGet = async (url: string) => {
   const session = await getServerSession(authOptions);
 
