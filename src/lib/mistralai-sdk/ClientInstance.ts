@@ -29,4 +29,4 @@ const chatResponse = await client.chat.complete({
   ],
 });
 
-console.log("Chat:", chatResponse.choices[0].message.content);
+// console.log("Chat:", chatResponse.choices[0].message.content);

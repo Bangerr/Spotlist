@@ -6,18 +6,14 @@ export async function POST(req: NextRequest) {
   try {
     const topTracksResponse = await getTopTracks();
 
-    if (!topTracksResponse.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch track" },
-        { status: topTracksResponse.status }
-      );
+    if (!topTracksResponse) {
+      return NextResponse.json({ error: "Failed to fetch track" });
     }
 
     const topTracksData = await topTracksResponse.json();
 
-    return new Response(JSON.stringify(topTracksData), {
+    return NextResponse.json(topTracksData, {
       status: 200,
-      headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     return NextResponse.json(
