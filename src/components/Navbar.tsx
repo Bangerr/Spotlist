@@ -7,7 +7,7 @@ import { ModeToggle } from "./ModeToggle";
 
 const Navbar = ({ session }: { session: any }) => {
   return (
-    <div className="w-full px-10 md:px-0 md:w-[30%] mx-auto flex justify-between items-center mt-5">
+    <div className="w-full px-10 lg:w-[50%] md:w-[75%] mx-auto flex justify-between items-center mt-5">
       <Link
         href="/"
         className="border rounded-lg p-2 hover:cursor-pointer bg-secondary tracking-widest text-black dark:text-primary hover:-translate-y-2 dark:bg-secondary 
