@@ -1,4 +1,4 @@
-// src/config/auth.ts
+import NextAuth from "next-auth/next";
 import { type NextAuthOptions } from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
@@ -18,7 +18,7 @@ export type AuthUser = {
 const scope =
   "user-read-email,user-read-private,user-top-read,playlist-read-private,playlist-modify-private,playlist-modify-public";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID || "",
@@ -117,3 +117,7 @@ async function refreshAccessToken(token: any) {
     };
   }
 }
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
