@@ -6,9 +6,9 @@ export async function POST(req: NextRequest) {
   try {
     const mistralResponse = await getTopArtists();
 
-    const mistralData = await mistralResponse.json();
+    //const mistralData = await mistralResponse.json();
 
-    return new Response(JSON.stringify(mistralData), {
+    return new Response(JSON.stringify(mistralResponse), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
