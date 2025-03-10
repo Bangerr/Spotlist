@@ -6,9 +6,13 @@ export async function POST(req: NextRequest) {
   try {
     const mistralResponse = await getTopArtists();
 
-    //const mistralData = await mistralResponse.json();
+    if (!mistralResponse) {
+      return NextResponse.json({ error: "Failed to fetch mistral analysis." });
+    }
 
-    return new Response(JSON.stringify(mistralResponse), {
+    const mistralData = await mistralResponse.json();
+
+    return NextResponse.json(mistralData, {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

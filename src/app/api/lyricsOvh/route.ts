@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     const lyrics = await lyricsResponse.json();
 
-    return new Response(JSON.stringify(lyrics), {
+    return NextResponse.json(lyrics, {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

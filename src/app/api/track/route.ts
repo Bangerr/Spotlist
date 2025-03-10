@@ -11,16 +11,13 @@ export async function POST(req: NextRequest) {
 
     const trackResponse = await getTrack(trackId);
 
-    // if (!trackResponse.ok) {
-    //   return NextResponse.json(
-    //     { error: "Failed to fetch track" },
-    //     { status: trackResponse.status }
-    //   );
-    // }
+    if (!trackResponse) {
+      return NextResponse.json({ error: "Failed to fetch track" });
+    }
 
-    //const trackData = await trackResponse.json();
+    const trackData = await trackResponse.json();
 
-    return new Response(JSON.stringify(trackResponse), {
+    return NextResponse.json(trackData, {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

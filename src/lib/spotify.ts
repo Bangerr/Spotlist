@@ -64,7 +64,7 @@ export const getTopTracks = async () => {
   const readableExpiry = new Date(expires_at * 1000).toLocaleString();
   console.log("Readable: ", readableExpiry);
 
-  return fetch(
+  const topTracks = await fetch(
     `https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10`,
     {
       headers: {
@@ -72,6 +72,8 @@ export const getTopTracks = async () => {
       },
     }
   );
+
+  return topTracks;
 };
 
 export const getTopArtists = async () => {
@@ -86,7 +88,7 @@ export const getTopArtists = async () => {
   const readableExpiry = new Date(expires_at * 1000).toLocaleString();
   console.log("Readable: ", readableExpiry);
 
-  return fetch(
+  const topArtists = fetch(
     `https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10`,
     {
       headers: {
@@ -94,6 +96,8 @@ export const getTopArtists = async () => {
       },
     }
   );
+
+  return topArtists;
 };
 
 export const customGet = async (url: string) => {
