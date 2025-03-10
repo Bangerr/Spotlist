@@ -21,7 +21,7 @@ const TopItems = () => {
           const data = await response.json();
           //console.log(data);
           const { items } = data;
-          console.log("Top Tracks: ", items[0].album.images[0]);
+          //console.log("Top Tracks: ", items[0].album.images[0]);
 
           setTopTracks(items);
         } else {
@@ -49,7 +49,7 @@ const TopItems = () => {
           const data = await response.json();
           //console.log(data);
           const { items } = data;
-          console.log("Top Artits: ", items);
+          //console.log("Top Artits: ", items);
           setTopArtists(items);
         } else {
           throw new Error("Failed to fetch top artists.");
@@ -68,73 +68,31 @@ const TopItems = () => {
   const maxRows = Math.max(topTracks?.length ?? 0, topArtists?.length ?? 0);
 
   return (
-    <div>
-      <div className="flex flex-row justify-between gap-10 w-full p-10 border rounded-2xl my-16 bg-secondary">
-        {/* Top Artists */}
-        <div className="w-1/2">
-          Top Artists:
-          <div className="flex flex-col gap-2">
-            {topArtists?.map((artist, index) => (
-              <div key={index} className="flex flex-row gap-4">
-                <span className="">{index + 1}</span>
-                <Image
-                  src={artist.images[0].url}
-                  alt="profilePicture"
-                  width={50}
-                  height={10}
-                  className="border rounded-full"
-                />
-                <a href={artist.external_urls.spotify} target="_blank">
-                  {artist.name}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* Top Tracks */}
-        <div className="w-1/2">
-          <h2 className="text-lg font-bold ">Top Tracks:</h2>
-          {topTracks !== null || topTracks !== undefined ? (
-            <div className="flex flex-col gap-2">
-              {topTracks?.map((track, index) => (
-                <div key={index} className="flex flex-row gap-4">
-                  <span className="">{index + 1}</span>
-                  <Image
-                    src={track.album.images[0].url}
-                    alt="profilePicture"
-                    width={50}
-                    height={50}
-                    className="border rounded-full"
-                  />
-                  <a href={track.external_urls.spotify} target="_blank">
-                    {track.name}
-                  </a>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div>Not found</div>
-          )}
-        </div>
-      </div>
-
-      <div className="bg-secondary border border-black dark:border-primary rounded-3xl p-10">
-        <table className="min-w-full px-10">
+    <div className="mt-16">
+      <h1 className="text-xl font-semibold mb-8 tracking-widest">
+        Most listened: Tracks/Artists
+      </h1>
+      <div className="bg-secondary border border-black dark:border-primary rounded-3xl ">
+        <table className="min-w-full">
           <thead className="border-b border-b-black dark:border-primary">
             <tr>
-              <th className="px-6 py-3 text-left text-gray-700 dark:text-[#d6cfcf] font-medium">
-                Top Tracks
+              <th className="">
+                <p className="px-2 py-8 ml-16 text-left text-lg font-semibold text-gray-700 dark:text-[#d6cfcf]">
+                  Top Tracks
+                </p>
               </th>
-              <th className="px-6 py-3 text-left text-gray-700 dark:text-[#d6cfcf] font-medium">
-                Top Artists
+              <th className="">
+                <p className="px-2 py-8 ml-16 text-left text-lg font-semibold text-gray-700 dark:text-[#d6cfcf]">
+                  Top Artists
+                </p>
               </th>
             </tr>
           </thead>
 
-          <tbody className="w-full">
+          <tbody className="w-full p-10">
             {Array.from({ length: maxRows }).map((_, i) => (
-              <tr key={i} className=" ">
-                <td className="w-1/2 px-6 py-3 text-[#424242] dark:text-[#a19a9a] font-medium hover:text-[#a19a9a] dark:hover:text-[#6c6b6b]">
+              <tr key={i} className="">
+                <td className="w-1/2 md:px-10 px-2 py-3 text-[#424242] dark:text-[#a19a9a] font-medium hover:text-[#a19a9a] dark:hover:text-[#6c6b6b]">
                   {topTracks && topTracks[i] ? (
                     <a
                       key={i}
@@ -155,7 +113,7 @@ const TopItems = () => {
                     "-"
                   )}
                 </td>
-                <td className="w-1/2 px-6 py-3 text-[#424242] dark:text-[#a19a9a] font-medium hover:text-[#a19a9a] dark:hover:text-[#6c6b6b]">
+                <td className="w-1/2 md:px-10 px-2 py-3 text-[#424242] dark:text-[#a19a9a] font-medium hover:text-[#a19a9a] dark:hover:text-[#6c6b6b]">
                   {topArtists && topArtists[i] ? (
                     <a
                       key={i}
