@@ -5,16 +5,16 @@ export async function POST(req: NextRequest) {
   try {
     const profileResponse = await customGet("https://api.spotify.com/v1/me");
 
-    if (!profileResponse.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch Profile Data" },
-        { status: profileResponse.status }
-      );
-    }
+    // if (!profileResponse.ok) {
+    //   return NextResponse.json(
+    //     { error: "Failed to fetch Profile Data" },
+    //     { status: profileResponse.status }
+    //   );
+    // }
 
-    const profileData = await profileResponse.json();
+    //const profileData = await profileResponse.json();
 
-    return new Response(JSON.stringify(profileData), {
+    return new Response(JSON.stringify(profileResponse), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

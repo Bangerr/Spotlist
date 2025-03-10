@@ -6,16 +6,16 @@ export async function POST(req: NextRequest) {
   try {
     const topArstitsResponse = await getTopArtists();
 
-    if (!topArstitsResponse.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch artists" },
-        { status: topArstitsResponse.status }
-      );
-    }
+    // if (!topArstitsResponse.ok) {
+    //   return NextResponse.json(
+    //     { error: "Failed to fetch artists" },
+    //     { status: topArstitsResponse.status }
+    //   );
+    // }
 
-    const topArtistsData = await topArstitsResponse.json();
+    //const topArtistsData = await topArstitsResponse.json();
 
-    return new Response(JSON.stringify(topArtistsData), {
+    return new Response(JSON.stringify(topArstitsResponse), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
