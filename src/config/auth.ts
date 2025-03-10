@@ -18,7 +18,7 @@ export type AuthUser = {
 const scope =
   "user-read-email,user-read-private,user-top-read,playlist-read-private,playlist-modify-private,playlist-modify-public";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID || "",
