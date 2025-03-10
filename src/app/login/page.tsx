@@ -14,7 +14,7 @@ export default function Login() {
     <Layout title="Log in to Spotify">
       <div className="flex flex-col items-center justify-center w-full h-screen gap-20">
         <Image
-          src="/images/spotify_logo.png"
+          src="/images/spotify_logo2.png"
           alt="spotify logo"
           width={320}
           height={96}
