@@ -14,16 +14,16 @@ export interface MySession extends Omit<DefaultSession, "user"> {
 }
 
 interface Image {
-  height: number | null;
-  url: string | null;
-  width: number | null;
+  height?: number | null;
+  url: string;
+  width?: number | null;
 }
 
 export interface Album {
   id: string;
   name: string;
   artists: [Artist]; // tuple with exactly one lement
-  images?: [Image];
+  images: Image[];
   album_type?: string;
   release_date?: string;
   tracks?: {
@@ -35,7 +35,7 @@ export interface Album {
 export interface Artist {
   id: string;
   name: string;
-  images?: [Image];
+  images: Image[];
   followers?: {
     total: number;
   };
