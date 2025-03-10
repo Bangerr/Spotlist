@@ -100,6 +100,7 @@ const TopItems = () => {
                       href={topTracks[i].external_urls.spotify}
                       target="_blank">
                       <span>{i + 1}. </span>
+
                       <Image
                         src={topTracks[i].album.images[0].url}
                         alt="profilePicture"
