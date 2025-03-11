@@ -19,7 +19,7 @@ const TopItems = () => {
 
         if (response.ok) {
           const data = await response.json();
-          //console.log(data);
+          console.log(data);
           const { items } = data;
           //console.log("Top Tracks: ", items[0].album.images[0]);
 
@@ -47,7 +47,7 @@ const TopItems = () => {
 
         if (response.ok) {
           const data = await response.json();
-          //console.log(data);
+          console.log(data);
           const { items } = data;
           //console.log("Top Artits: ", items);
           setTopArtists(items);
@@ -100,6 +100,7 @@ const TopItems = () => {
                       href={topTracks[i].external_urls.spotify}
                       target="_blank">
                       <span>{i + 1}. </span>
+
                       <Image
                         src={topTracks[i].album.images[0].url}
                         alt="profilePicture"

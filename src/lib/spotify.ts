@@ -1,3 +1,4 @@
+import { AuthUser } from "@/app/api/auth/[...nextauth]/route";
 import { authOptions } from "@/config/auth";
 import { getServerSession } from "next-auth";
 
@@ -24,7 +25,13 @@ import { getServerSession } from "next-auth";
 export const getPlaylist = async (playlist_id: string) => {
   const session = await getServerSession(authOptions);
 
-  const access_token = session?.token?.access_token;
+  if (!session) {
+    return console.error("Session not found or user not signed in.");
+  }
+
+  const user = session.user as AuthUser;
+
+  const access_token = user.access_token;
 
   return fetch(`https://api.spotify.com/v1/playlists/${playlist_id}`, {
     headers: {
@@ -40,8 +47,12 @@ export const getTrack = async (trackId: string) => {
     return console.error("Session not found or user not signed in.");
   }
 
-  const access_token = session?.token?.access_token;
-  const expires_at = session?.token?.expires_at;
+  const user = session.user as AuthUser;
+  console.log("User: ", user);
+
+  const access_token = user.access_token;
+  console.log("Access Token: ", access_token);
+  const expires_at = user.expires_at;
   const readableExpiry = new Date(expires_at * 1000).toLocaleString();
   console.log("Readable: ", readableExpiry);
 
@@ -59,12 +70,14 @@ export const getTopTracks = async () => {
     return console.error("Session not found or user not signed in.");
   }
 
-  const access_token = session?.token?.access_token;
-  const expires_at = session?.token?.expires_at;
+  const user = session.user as AuthUser;
+
+  const access_token = user.access_token;
+  const expires_at = user.expires_at;
   const readableExpiry = new Date(expires_at * 1000).toLocaleString();
   console.log("Readable: ", readableExpiry);
 
-  return fetch(
+  const topTracks = await fetch(
     `https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10`,
     {
       headers: {
@@ -72,6 +85,8 @@ export const getTopTracks = async () => {
       },
     }
   );
+
+  return topTracks;
 };
 
 export const getTopArtists = async () => {
@@ -81,12 +96,14 @@ export const getTopArtists = async () => {
     return console.error("Session not found or user not signed in.");
   }
 
-  const access_token = session?.token?.access_token;
-  const expires_at = session?.token?.expires_at;
+  const user = session.user as AuthUser;
+
+  const access_token = user.access_token;
+  const expires_at = user.expires_at;
   const readableExpiry = new Date(expires_at * 1000).toLocaleString();
   console.log("Readable: ", readableExpiry);
 
-  return fetch(
+  const topArtists = fetch(
     `https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10`,
     {
       headers: {
@@ -94,6 +111,8 @@ export const getTopArtists = async () => {
       },
     }
   );
+
+  return topArtists;
 };
 
 export const customGet = async (url: string) => {
@@ -103,7 +122,9 @@ export const customGet = async (url: string) => {
     return console.error("Session not found or user not signed in.");
   }
 
-  const access_token = session?.token?.access_token;
+  const user = session.user as AuthUser;
+
+  const access_token = user.access_token;
 
   return fetch(url, {
     headers: {
