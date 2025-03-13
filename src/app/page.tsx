@@ -2,8 +2,6 @@
 import { useSession } from "next-auth/react";
 import Login from "./login/page";
 import { ChartConfig } from "@/components/ui/chart";
-import VibeChecker from "@/components/VibeChecker";
-import TrackDetails from "@/components/TrackDetails";
 import TopItems from "@/components/TopItems";
 
 const chartConfig = {
@@ -35,15 +33,7 @@ export default function Home() {
 
   return (
     <main className="w-full px-8 lg:w-[50%] md:w-[75%] mx-auto h-full">
-      <div className="w-full mx-auto flex justify-center mt-16">
-        <p className="text-[#52525b] text-[1.1rem] font-semibold">
-          This app repesents the data from the last 6 Months.
-        </p>
-      </div>
-      {/* Vibe checker */}
-      <div className="mt-20">
-        {/* <VibeChecker chartData={chartData} /> */}
-        {/* <TrackDetails /> */}
+      <div className="mt-10">
         <TopItems />
       </div>
     </main>

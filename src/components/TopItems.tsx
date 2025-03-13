@@ -68,9 +68,10 @@ const TopItems = () => {
   const maxRows = Math.max(topTracks?.length ?? 0, topArtists?.length ?? 0);
 
   return (
-    <div className="mt-16">
-      <h1 className="text-xl font-semibold mb-8 tracking-widest">
-        Most listened: Tracks/Artists
+    <div className="mt-10">
+      <h1 className="text-xl text-[#ffffff] text-[1.1rem] text-center font-semibold mb-8 tracking-widest">
+        This App represents the most listened to Artists and Track by you in the
+        past 6 months.
       </h1>
       <div className="bg-secondary border border-black dark:border-primary rounded-3xl ">
         <table className="min-w-full">
