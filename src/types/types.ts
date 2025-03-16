@@ -52,6 +52,7 @@ export interface Track {
   external_urls: { spotify: string };
 }
 
+// Future integration
 export interface PlaylistType {
   description?: string;
   id: string;
