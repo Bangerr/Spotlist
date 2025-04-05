@@ -19,12 +19,9 @@ export default function Track() {
 
         if (response.ok) {
           const data = await response.json();
-
-          console.log(data);
           setTrackData(data);
           const { external_ids } = data;
           setIsrc_ids((prevIsrcIds) => [...prevIsrcIds, external_ids.isrc]);
-          console.log(isrc_ids);
         } else {
           throw new Error("Failed to fetch the Track.");
         }

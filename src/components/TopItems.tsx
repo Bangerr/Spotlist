@@ -19,9 +19,7 @@ const TopItems = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           const { items } = data;
-          //console.log("Top Tracks: ", items[0].album.images[0]);
 
           setTopTracks(items);
         } else {
@@ -47,9 +45,7 @@ const TopItems = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           const { items } = data;
-          //console.log("Top Artits: ", items);
           setTopArtists(items);
         } else {
           throw new Error("Failed to fetch top artists.");
@@ -61,9 +57,6 @@ const TopItems = () => {
 
     fetchTopArtists();
   }, []);
-
-  // console.log("Top Tracks: ", topTracks);
-  // console.log("Top Artist: ", topArtists);
 
   const maxRows = Math.max(topTracks?.length ?? 0, topArtists?.length ?? 0);
 

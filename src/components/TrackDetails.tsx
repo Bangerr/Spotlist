@@ -31,7 +31,6 @@ const TrackDetails = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           setTrackData(data);
 
           const { external_ids } = data;
@@ -62,7 +61,6 @@ const TrackDetails = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
 
           //musixwatch lyrics
           // const { lyrics } = data.message.body;

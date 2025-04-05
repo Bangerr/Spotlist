@@ -2,7 +2,6 @@ import { getTopTracks } from "@/lib/spotify";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  console.log("Entered top Tracks");
   try {
     const topTracksResponse = await getTopTracks();
 

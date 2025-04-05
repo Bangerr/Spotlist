@@ -23,9 +23,7 @@ const Profile = ({ session }: { session: any }) => {
 
         if (response.ok) {
           const profileData = await response.json();
-          console.log(profileData);
           setUserData(profileData);
-          console.log(userData);
         }
       } catch (error) {
         console.error("Could not get profile", error);

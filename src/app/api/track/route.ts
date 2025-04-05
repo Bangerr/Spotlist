@@ -27,8 +27,4 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-
-  //const track = await getTrack(playlistId);
-
-  //return NextResponse.json(track, { status: 200 });
 }
