@@ -12,7 +12,7 @@ const Navbar = ({ session }: { session: any }) => {
         href="/"
         className="border rounded-lg p-2 hover:cursor-pointer bg-secondary tracking-widest text-black dark:text-primary hover:-translate-y-2 dark:bg-secondary 
         dark:hover:text-primary duration-500">
-        Spoofylist
+        Spotlist
       </Link>
       <div className=" flex flex-row gap-4">
         <ModeToggle />

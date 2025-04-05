@@ -62,10 +62,16 @@ const TopItems = () => {
 
   return (
     <div className="mt-10">
-      <h1 className="text-xl text-[#ffffff] text-[1.1rem] text-center font-semibold mb-8 tracking-widest">
-        This App represents the most listened to Artists and Track by you in the
-        past 6 months.
-      </h1>
+      {/* App Introduction */}
+      <div className="mb-12 text-center">
+        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-2">
+          Your Top Spotify Picks
+        </h1>
+        <p className="text-lg text-gray-400 dark:text-gray-300">
+          Discover your most played tracks and artists from the last 6 months.
+        </p>
+      </div>
+      {/* List: Top Tracks and Top Artists */}
       <div className="bg-secondary border border-black dark:border-primary rounded-3xl ">
         <table className="min-w-full">
           <thead className="border-b border-b-black dark:border-primary">
