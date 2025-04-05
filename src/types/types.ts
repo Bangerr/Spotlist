@@ -73,3 +73,10 @@ export interface PlaylistType {
   type?: string;
   total?: number;
 }
+
+export interface ProfileData {
+  display_name: string;
+  email: string;
+  images: Array<{ url: string }>;
+  followers: { total: number };
+}

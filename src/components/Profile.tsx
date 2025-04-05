@@ -1,13 +1,8 @@
 "use client";
+import { ProfileData } from "@/types/types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-interface ProfileData {
-  display_name: string;
-  email: string;
-  images: Array<{ url: string }>;
-  followers: { total: number };
-}
 const Profile = ({ session }: { session: any }) => {
   const [userData, setUserData] = useState<ProfileData | null>(null);
 
