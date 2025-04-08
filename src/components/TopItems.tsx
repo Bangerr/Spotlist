@@ -19,9 +19,7 @@ const TopItems = () => {
 
         if (response.ok) {
           const data = await response.json();
-          const { items } = data;
-
-          setTopTracks(items);
+          setTopTracks(data.items);
         } else {
           throw new Error("Failed to fetch top Tracks.");
         }
@@ -45,8 +43,7 @@ const TopItems = () => {
 
         if (response.ok) {
           const data = await response.json();
-          const { items } = data;
-          setTopArtists(items);
+          setTopArtists(data.items);
         } else {
           throw new Error("Failed to fetch top artists.");
         }
@@ -57,8 +54,6 @@ const TopItems = () => {
 
     fetchTopArtists();
   }, []);
-
-  const maxRows = Math.max(topTracks?.length ?? 0, topArtists?.length ?? 0);
 
   return (
     <div className="mt-10">
@@ -90,50 +85,48 @@ const TopItems = () => {
           </thead>
 
           <tbody className="w-full p-10">
-            {Array.from({ length: maxRows }).map((_, i) => (
-              <tr key={i} className="">
+            {/* Top Tracks */}
+            {topTracks?.map((track, index) => (
+              <tr key={index} className="">
                 <td className="w-1/2 md:px-10 px-2 py-3 text-[#424242] dark:text-[#a19a9a] font-medium hover:text-[#a19a9a] dark:hover:text-[#6c6b6b]">
-                  {topTracks && topTracks[i] ? (
-                    <a
-                      key={i}
-                      className="flex flex-row gap-3 items-center"
-                      href={topTracks[i].external_urls.spotify}
-                      target="_blank">
-                      <span>{i + 1}. </span>
+                  <a
+                    key={index}
+                    className="flex flex-row gap-3 items-center"
+                    href={track.external_urls.spotify}
+                    target="_blank">
+                    <span>{index + 1}. </span>
 
-                      <Image
-                        src={topTracks[i].album.images[0].url}
-                        alt="profilePicture"
-                        width={50}
-                        height={50}
-                        className="border rounded-full"
-                      />
-                      {topTracks[i].name}
-                    </a>
-                  ) : (
-                    "-"
-                  )}
+                    <Image
+                      src={track.album.images[0].url}
+                      alt="profilePicture"
+                      width={50}
+                      height={50}
+                      className="border rounded-full"
+                    />
+                    {track.name}
+                  </a>
                 </td>
+              </tr>
+            ))}
+            {/* Top Artists */}
+            {topArtists?.map((artist, index) => (
+              <tr key={index} className="">
                 <td className="w-1/2 md:px-10 px-2 py-3 text-[#424242] dark:text-[#a19a9a] font-medium hover:text-[#a19a9a] dark:hover:text-[#6c6b6b]">
-                  {topArtists && topArtists[i] ? (
-                    <a
-                      key={i}
-                      className="flex flex-row gap-3 items-center"
-                      href={topArtists[i].external_urls.spotify}
-                      target="_blank">
-                      <span>{i + 1}. </span>
-                      <Image
-                        src={topArtists[i].images[0].url}
-                        alt="profilePicture"
-                        width={50}
-                        height={10}
-                        className="border rounded-full"
-                      />
-                      {topArtists[i].name}
-                    </a>
-                  ) : (
-                    "-"
-                  )}
+                  <a
+                    key={index}
+                    className="flex flex-row gap-3 items-center"
+                    href={artist.external_urls.spotify}
+                    target="_blank">
+                    <span>{index + 1}. </span>
+                    <Image
+                      src={artist.images[0].url}
+                      alt="profilePicture"
+                      width={50}
+                      height={10}
+                      className="border rounded-full"
+                    />
+                    {artist.name}
+                  </a>
                 </td>
               </tr>
             ))}
