@@ -108,6 +108,14 @@ const TopItems = () => {
             Top Artits
           </h2>
           <div className="flex flex-col gap-5">
+          </div>
+        </div>
+        {/* Top Artists */}
+        <div className="basis-1/2 bg-secondary/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl text-gray-800 dark:text-gray-500 font-bold mb-6">
+            Top Artits
+          </h2>
+          <div className="flex flex-col gap-5">
             {topArtists?.map((artist, index) => (
               <a
                 key={index}
@@ -133,6 +141,8 @@ const TopItems = () => {
                 </div>
               </a>
             ))}
+          </div>
+        </div>
           </div>
         </div>
       </div>
