@@ -1,13 +1,11 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
 import React from "react";
 import { Button } from "./ui/button";
 
 const Login = () => {
   const handleLogin = async () => {
     await signIn();
-    redirect("/");
   };
 
   return (
