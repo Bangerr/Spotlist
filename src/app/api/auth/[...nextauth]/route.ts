@@ -15,19 +15,28 @@ export type AuthUser = {
   id: string;
 };
 
-const scope =
-  "user-read-email,user-read-private,user-top-read,playlist-read-private,playlist-modify-private,playlist-modify-public";
+const scopes = [
+  "user-read-email",
+  "user-read-private",
+  "user-top-read",
+  "playlist-read-private",
+  "playlist-modify-private",
+  "playlist-modify-public",
+];
+
+const spotifyProvider = SpotifyProvider({
+  clientId: process.env.SPOTIFY_CLIENT_ID || "",
+  clientSecret: process.env.SPOTIFY_CLIENT_SECRET || "",
+});
+
+const authURL = new URL("https://accounts.spotify.com/authorize");
+
+authURL.searchParams.append("scope", scopes.join(" "));
+
+spotifyProvider.authorization = authURL.toString();
 
 const authOptions: NextAuthOptions = {
-  providers: [
-    SpotifyProvider({
-      clientId: process.env.SPOTIFY_CLIENT_ID || "",
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET || "",
-      authorization: {
-        params: { scope },
-      },
-    }),
-  ],
+  providers: [spotifyProvider],
   session: {
     maxAge: 60 * 60, //1min
   },
