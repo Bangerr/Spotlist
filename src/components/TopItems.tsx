@@ -6,54 +6,91 @@ import Image from "next/image";
 const TopItems = () => {
   const [topTracks, setTopTracks] = useState<Track[] | null>(null);
   const [topArtists, setTopArtists] = useState<Artist[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchTopTracks() {
+    async function fetchTopItems() {
+      setIsLoading(true);
+      setError(null);
       try {
-        const response = await fetch("/api/topTracks", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const [tracksResponse, artistsResponse] = await Promise.all([
+          fetch("/api/topTracks", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }),
+          fetch("/api/topArtists", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }),
+        ]);
 
-        if (response.ok) {
-          const data = await response.json();
-          setTopTracks(data.items);
-        } else {
-          throw new Error("Failed to fetch top Tracks.");
+        if (!tracksResponse.ok) {
+          throw new Error(
+            `Failed to fetch top Tracks (${tracksResponse.status})`
+          );
         }
-      } catch (err) {
-        console.error("Top tracks fetching failed Step: ", err);
+        if (!artistsResponse.ok) {
+          throw new Error(
+            `Failed to fetch top Artists (${artistsResponse.status})`
+          );
+        }
+
+        const [tracksData, artistsData] = await Promise.all([
+          tracksResponse.json(),
+          artistsResponse.json(),
+        ]);
+
+        setTopTracks(tracksData.items);
+        setTopArtists(artistsData.items);
+      } catch (err: any) {
+        console.error("Top items fetching failed:", err);
+        setError(err.message || "Failed to fetch data.");
+      } finally {
+        setIsLoading(false);
       }
     }
 
-    fetchTopTracks();
+    fetchTopItems();
   }, []);
 
-  useEffect(() => {
-    async function fetchTopArtists() {
-      try {
-        const response = await fetch("/api/topArtists", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  if (isLoading) {
+    return (
+      <div className="flex flex-col text-gray-300 gap-5 justify-center items-center h-screen">
+        Searching....
+        <svg
+          className="animate-spin h-10 w-10 text-gray-500"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24">
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4.93 4.93a10 10 0 0114.14 14.14l-1.41-1.41a8 8 0 00-11.31-11.31L4.93 4.93z"></path>
+        </svg>
+      </div>
+    );
+  }
 
-        if (response.ok) {
-          const data = await response.json();
-          setTopArtists(data.items);
-        } else {
-          throw new Error("Failed to fetch top artists.");
-        }
-      } catch (err) {
-        console.error("Top artists fetching failed Step: ", err);
-      }
-    }
-
-    fetchTopArtists();
-  }, []);
+  if (error) {
+    return (
+      <div className="mt-10 text-center text-red-500">
+        <p>Could not load Spotify data: {error}</p>
+        <p>Please try refreshing the page or logging in again.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-10">
